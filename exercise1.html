@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<title>旅館拉</title>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+		<script>
+			$(function(){
+				$.ajax({
+					url: "http://140.134.26.71:58080/web-prog/Hotels",
+					type: "GET",
+					dataType: "json",
+					success: function(data) {
+						var items = data.Infos.Info;
+						for(var i = 0; i < 40; i++) {
+							var name = items[i].Name;
+							var imgURL1 = items[i].Picture1;
+							var website = items[i].Website;
+							var imgURL2 = items[i].Picture2;
+							$("#attractions").append('<div class="polaroid"><a href="'+website+'"><img src="'+imgURL1+'" height="250" width="280"><div class="container">'+items[i].Name+'</div></a></div>');
+						}
+					},
+					error: function() {
+
+					}
+				});
+			});
+		</script>
+		<style>
+			#search_pad{
+
+			}
+			#attractions{
+				margin: 100px;
+				column-count: 4;
+				column-gap: 30px;
+			}
+			div.polaroid{
+				width: 280px;
+				box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+				text-align: center;
+				opacity: 0.7;
+				background-color: rgb(240,240,240);
+			}
+			div.polaroid:hover{
+				opacity: 1;
+				background-color: white;
+				box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.6), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+			}
+			div.container{
+				margin-bottom: 20px;
+				padding: 10px;
+				text-overflow: ellipsis;
+				overflow: hidden;
+				white-space: nowrap;
+				font-style: oblique;
+			}
+			a{
+				text-decoration: none;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="attractions">
+		</div>
+	</body>
+</html>
